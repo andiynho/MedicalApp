@@ -1,0 +1,4 @@
+The php code until now consists of:
+ - main_code: the code that the application will run
+ - db_connect: the module used to connect to the database
+ - search_patients: the module used to display the patients from the patients tables
