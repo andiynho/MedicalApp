@@ -1,0 +1,298 @@
+<%@ page import="javax.swing.JOptionPane"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="com.DB"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient Account</title>
+</head>
+<body background="vector-medical-and-healthcare-background-with-electrocardiogram.jpg">
+<b><font size="6" color="white">MEDICAL PROFILE</font></b>
+<ul>
+  <a style="font-size:30px" href="index.jsp">Home</a><br>
+  <a style="font-size:30px" href="patient-login.jsp">Log-In</a>
+</ul>
+<div style="font-size:30px" align="center">
+Welcome
+<br>
+<%
+String user = (String)session.getAttribute("name");
+
+Connection con=DB.getConnection();
+
+PreparedStatement username = con.prepareStatement("SELECT * FROM account WHERE username=?;");
+
+username.setString(1, user);
+
+ResultSet U=username.executeQuery();
+int id=0;
+if(U.next()){
+	String name=U.getString("name");
+	id=U.getInt("account_ID");
+	out.println(name);
+		
+}
+
+%>
+
+</div>
+<br>
+<br>
+<br>
+<div style="font-size:27px" align="left">
+<table border="1">
+<tr><th>Your Medical Records</th></tr>
+<%
+PreparedStatement records = con.prepareStatement("SELECT * FROM records WHERE account_ID=?;");
+records.setInt(1, id);
+ResultSet R=records.executeQuery();
+if(R.next()){
+	String diagnostics=R.getString("diagnostics");
+	String allergies=R.getString("allergies");
+	String treatment=R.getString("treatment_schema");
+	String surgeries=R.getString("surgeries");
+	String diet=R.getString("diet");
+	String blood=R.getString("blood_pressure");
+	String temperature=R.getString("temperature");
+	
+
+%>
+<tr>
+<td><a href="#" onclick="dispDiagnostics()">Diagnostics</a></td>
+<td><div id="diagnostics" style="display: none;">
+  <%
+  	out.println(diagnostics);
+  %>
+</div>
+</td>
+</tr>
+<script>
+function dispDiagnostics() {
+	  var x = document.getElementById("diagnostics");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+<tr>
+<td>
+<a href="#" onclick="dispAllergies()">Allergies</a></td>
+<td><div id="allergies" style="display: none;">
+<%
+	if(allergies==null){
+		out.println("There are no allergies to be displayed");
+	}
+	else{
+		out.println(allergies);	
+	}
+%>
+</div>
+</td>
+</tr>
+
+<script>
+function dispAllergies() {
+	  var x = document.getElementById("allergies");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+<tr>
+<td>
+<a href="#" onclick="dispTreatment()">Treatment Schema</a></td>
+<td>
+<div id="treatment" style="display: none;">
+<%
+	if(treatment==null){
+		out.println("There is no treatment schema to be displayed");
+	}
+	else{
+		out.println(treatment);	
+	}
+
+%>
+</div>
+</td>
+</tr>
+
+<script>
+function dispTreatment() {
+	  var x = document.getElementById("treatment");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+
+<tr>
+<td>
+<a href="#" onclick="dispSurgeries()">Surgeries</a></td>
+<td><div id="surgeries" style="display: none;">
+<%
+	if(surgeries==null){
+		out.println("There are no surgeries to be displayed");
+	}
+	else{
+		out.println(surgeries);	
+	}
+
+%>
+</div>
+</td>
+</tr>
+
+<script>
+function dispSurgeries() {
+	  var x = document.getElementById("surgeries");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+<tr>
+<td>
+<a href="#" onclick="dispDiet()">Diet</a></td>
+<td><div id="diet" style="display: none;">
+<%
+	if(diet==null){
+		out.println("There are no diet to be displayed");
+	}
+	else{
+		out.println(diet);	
+	}
+
+%>
+</div>
+</td>
+</tr>
+
+<script>
+function dispDiet() {
+	  var x = document.getElementById("diet");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+<tr>
+<td>
+<a href="#" onclick="dispBlood()">Blood-Pressure</a></td>
+<td><div id="blood" style="display: none;">
+<%
+	if(blood==null){
+		out.println("The blood-pressure has not been measured");
+	}
+	else{
+		out.println(blood);	
+	}
+
+%>
+</div>
+</td>
+</tr>
+
+<script>
+function dispBlood() {
+	  var x = document.getElementById("blood");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+<tr>
+<td>
+<a href="#" onclick="dispTemperature()">Temperature</a></td>
+<td>
+<div id="temperature" style="display: none;">
+<%
+	if(temperature==null){
+		out.println("The temperature has not been measured");
+	}
+	else{
+		out.println(temperature);	
+	}
+}
+
+%>
+</div>
+</td>
+</tr>
+
+<script>
+function dispTemperature() {
+	  var x = document.getElementById("temperature");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+</table>
+</div>
+<div style="font-size:30px" align="right">
+<a href="#" onclick="dispAppointment()">Appointment</a><br>
+<div id="appointment" style="display: none;">
+<%
+PreparedStatement appointment = con.prepareStatement("SELECT * FROM appointment WHERE account_ID=?;");
+appointment.setInt(1, id);
+
+ResultSet A=appointment.executeQuery();
+String time="";
+String date="";
+while(A.next()){
+	String status=A.getString("appointment_status");
+	if (status.equals("pending")){
+		time=(String)A.getString("time");
+		date=(String)A.getString("date");
+	}
+}
+if(date.equals("")){
+	out.print("You have no appointment");
+}else {
+	out.print("Date: "+date);
+	%>
+	<br>
+	<%
+	out.print("Time: "+time);
+}
+%>
+</div>
+</div>
+<script>
+function dispAppointment() {
+	  var x = document.getElementById("appointment");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	} 
+</script>
+
+</body>
+</html>

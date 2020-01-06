@@ -1,0 +1,61 @@
+<%@ page import="javax.swing.JOptionPane"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="com.DB"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Account</title>
+</head>
+<style>
+div {
+	    height: 200px;
+	    width: 400px;
+	
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    margin-top: -100px;
+	    margin-left: -200px;
+	}
+</style>
+<body background="vector-medical-and-healthcare-background-with-electrocardiogram.jpg">
+<b><font size="6" color="white">MEDICAL PROFILE</font></b>
+<ul>
+  <a style="font-size:30px" href="index.jsp">Home</a><br>
+  <a style="font-size:30px" href="admin-login.jsp">Log-In</a>
+</ul>
+<p style="font-size:30px" align="center">
+Welcome
+<br>
+<%
+String user = (String)session.getAttribute("admin-name");
+
+Connection con=DB.getConnection();
+
+PreparedStatement username = con.prepareStatement("SELECT * FROM account WHERE username=?;");
+
+username.setString(1, user);
+
+ResultSet U=username.executeQuery();
+int id=0;
+if(U.next()){
+	String name=U.getString("name");
+	id=U.getInt("account_ID");
+	out.println(name);
+		
+}
+
+%>
+</p>
+<div>
+<a style="font-size:40px" href="patient-create.jsp">Create patient account</a><br>
+<a style="font-size:40px" href="doctor-create.jsp">Create doctor account</a><br>
+<a style="font-size:40px" href="admin-create.jsp">Create admin account</a><br>
+</div>
+</body>
+</html>

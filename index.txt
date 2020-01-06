@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Medical Profile</title>
+</head>
+<style>
+div {
+	    height: 200px;
+	    width: 400px;
+	
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    margin-top: -100px;
+	    margin-left: -200px;
+	}
+</style>
+<body background="vector-medical-and-healthcare-background-with-electrocardiogram.jpg">
+<b><font size="6" color="white">MEDICAL PROFILE</font></b>
+
+<div>
+<a style="font-size:40px" href="patient-login.jsp">Log-in as patient</a><br>
+<a style="font-size:40px" href="doctor-login.jsp">Log-in as doctor</a><br>
+<a style="font-size:40px" href="admin-login.jsp">Log-in as admin</a><br>
+</div>
+</body>
+</html>

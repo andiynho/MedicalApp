@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Doctor Account</title>
+</head>
+<style>
+div {
+	    height: 300px;
+	    width: 600px;
+	
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    margin-top: -100px;
+	    margin-left: -200px;
+	}
+</style>
+<body background="vector-medical-and-healthcare-background-with-electrocardiogram.jpg">
+<b><font size="6" color="white">MEDICAL PROFILE</font></b>
+<ul>
+  <a style="font-size:30px" href="index.jsp">Home</a>
+</ul>
+	<div>
+	<form action="regcheck-doctor.jsp" method="post">
+	<table border="0">
+	<tr><th style="font-size:30px">Doctor Log-in:</th></tr>
+	
+	<tr>
+		<td style="font-size:30px">User Name</td>
+		<td><input style="font-size:30px" type="text" name="username-doctor" value="" placeholder="enter username"></td>
+	</tr>
+	<tr>
+		<td style="font-size:30px">Password</td>
+		<td><input style="font-size:30px" type="text" name="password-doctor" value="" placeholder="enter password"></td>
+	</tr>
+	</table>
+	<input style="font-size:30px" type="submit" value="submit">
+	</form>
+	</div>
+</body>
+</html>

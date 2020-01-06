@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Create Account</title>
+</head><style>
+div {
+	    height: 300px;
+	    width: 600px;
+	
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    margin-top: -100px;
+	    margin-left: -200px;
+	}
+</style>
+<body background="vector-medical-and-healthcare-background-with-electrocardiogram.jpg">
+<b><font size="6" color="white">MEDICAL PROFILE</font></b>
+<ul>
+  <a style="font-size:30px" href="index.jsp">Home</a><br>
+  <a style="font-size:30px" href="admin-login.jsp">Log-In</a><br>
+  <a style="font-size:30px" href="admin-account.jsp">Account</a>
+</ul>
+	<div>
+	<form action="admin-approve.jsp" method="post">
+	<table border="0">
+	<tr><th style="font-size:30px">Create Admin Account</th></tr>
+	<tr>
+		<td style="font-size:30px">Name</td>
+		<td><input style="font-size:30px" type="text" name="name-admin" value="" placeholder="enter name"></td>
+	</tr>
+	<tr>
+		<td style="font-size:30px">CNP</td>
+		<td><input style="font-size:30px" type="text" name="CNP-admin" value="" placeholder="enter CNP"></td>
+	</tr>
+	<tr>
+		<td style="font-size:30px">E-mail Address</td>
+		<td><input style="font-size:30px" type="text" name="email-admin" value="" placeholder="enter e-mail"></td>
+	</tr>
+	<tr>
+		<td style="font-size:30px">User Name</td>
+		<td><input style="font-size:30px" type="text" name="username-admin" value="" placeholder="enter username"></td>
+	</tr>
+	<tr>
+		<td style="font-size:30px">Password</td>
+		<td><input style="font-size:30px" type="text" name="password-admin" value="" placeholder="enter password"></td>
+	</tr>
+	</table>
+	<input style="font-size:30px" type="submit" value="submit">
+	</form>
+	</div>
+</body>
+</html>

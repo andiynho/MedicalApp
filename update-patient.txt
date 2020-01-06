@@ -1,0 +1,160 @@
+<%@ page import="javax.swing.JOptionPane"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="com.DB"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+Connection con=DB.getConnection();
+
+String user = (String)session.getAttribute("doc-name");
+
+PreparedStatement username = con.prepareStatement("SELECT * FROM account WHERE username=?;");
+
+username.setString(1, user);
+
+ResultSet U=username.executeQuery();
+String name="";
+int id=0;
+int patient_id=0;
+
+if(U.next()){
+	name=U.getString("name");
+}
+
+PreparedStatement med_pers = con.prepareStatement("SELECT * FROM medical_personnel WHERE m_personnel_name=?;");
+med_pers.setString(1, name);
+ResultSet M=med_pers.executeQuery();
+
+if(M.next()){
+	id=M.getInt("m_personnel_ID");
+}
+
+PreparedStatement patients = con.prepareStatement("SELECT * FROM account WHERE m_personnel_ID=?;");
+patients.setInt(1, id);
+ResultSet P=patients.executeQuery();
+int i=0;
+while(P.next()){
+	i++;
+	%>
+	<%
+		patient_id = P.getInt("account_ID"); 
+		String diagnostics = request.getParameter("diagnostics"+i);
+		String allergies = request.getParameter("allergies"+i);
+		String treatment = request.getParameter("treatment"+i);
+		String surgeries = request.getParameter("surgeries"+i);
+		String diet = request.getParameter("diet"+i);
+		String blood = request.getParameter("blood"+i);
+		String temperature = request.getParameter("temperature"+i);
+		if(request.getParameter("diagnosticsSub"+i)!=null){
+			PreparedStatement diag = con.prepareStatement("UPDATE records SET diagnostics = ? WHERE account_ID=?;  ");
+			diag.setString(1, diagnostics);
+			diag.setInt(2, patient_id);
+			int x = diag.executeUpdate();
+			if(x > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}else if(request.getParameter("allergiesSub"+i)!=null){
+			PreparedStatement aller = con.prepareStatement("UPDATE records SET allergies = ? WHERE account_ID=?;  ");
+			aller.setString(1, allergies);
+			aller.setInt(2, patient_id);
+			int y = aller.executeUpdate();
+			if(y > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}else if(request.getParameter("treatmentSub"+i)!=null){
+			PreparedStatement treat = con.prepareStatement("UPDATE records SET treatment_schema = ? WHERE account_ID=?;  ");
+			treat.setString(1, treatment);
+			treat.setInt(2, patient_id);
+			int z = treat.executeUpdate();
+			if(z > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}else if(request.getParameter("surgeriesSub"+i)!=null){
+			PreparedStatement surg = con.prepareStatement("UPDATE records SET surgeries = ? WHERE account_ID=?;  ");
+			surg.setString(1, surgeries);
+			surg.setInt(2, patient_id);
+			int t = surg.executeUpdate();
+			if(t > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}else if(request.getParameter("dietSub"+i)!=null){
+			PreparedStatement di = con.prepareStatement("UPDATE records SET diet = ? WHERE account_ID=?;  ");
+			di.setString(1, diet);
+			di.setInt(2, patient_id);
+			int u = di.executeUpdate();
+			if(u > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}else if(request.getParameter("bloodSub"+i)!=null){
+			PreparedStatement bl = con.prepareStatement("UPDATE records SET blood_pressure = ? WHERE account_ID=?;  ");
+			bl.setString(1, blood);
+			bl.setInt(2, patient_id);
+			int k = bl.executeUpdate();
+			if(k > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}else if(request.getParameter("temperatureSub"+i)!=null){
+			PreparedStatement temp = con.prepareStatement("UPDATE records SET temperature = ? WHERE account_ID=?;  ");
+			temp.setString(1, temperature);
+			temp.setInt(2, patient_id);
+			int l = temp.executeUpdate();
+			if(l > 0)
+			{
+				JOptionPane.showMessageDialog(null,"Record Updated Successfully");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"There is a problem in updating Record.");
+			} 
+			response.sendRedirect("doctor-account.jsp");
+		}
+}
+%>
+
+</body>
+</html>
